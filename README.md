@@ -21,6 +21,8 @@
 
 ![Landing de Nexo](img/landing.png)
 
+> **Para ser claro:** es un proyecto propio. Nunca lo ofrecí ni lo vendí, y ningún comercio lo usa: es un prototipo con datos ficticios.
+
 ## La idea
 
 Trabajé atendiendo gente en hora pico, en una central de taxis y en un comercio, y sé lo que pasa cuando suena el teléfono y no hay manos: se pierden pedidos, el cliente se enoja y nadie se entera.
