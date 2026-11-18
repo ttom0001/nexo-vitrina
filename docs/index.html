@@ -1,0 +1,241 @@
+<title>Nexo Atención Comercial</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Nexo: asistente virtual de atención por teléfono, chat y WhatsApp para comercios. Demostración conceptual.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: banda azul marino de apertura con una llamada en vivo como prueba; luego secciones claras alternadas y cierre azul marino. */
+:root {
+  --navy: #0B1F3A; --navy-2: #143563; --celeste: #3DB3F5; --celeste-ink: #0A6EA8; --celeste-soft: #E5F4FD;
+  --bg: #FFFFFF; --bg-2: #F2F7FB; --fg: #0B1F3A; --muted: #4F6782; --line: #D5E4F0; --amber: #FFD25E; --ok: #17895C;
+  --f-display: "Unbounded", "Trebuchet MS", sans-serif; --f-body: "Onest", "Segoe UI", system-ui, sans-serif; --f-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #071427; --bg-2: #0C1E38; --fg: #EAF4FC; --muted: #A2B8CE; --line: #1F3B60; --celeste-soft: #12365C; --celeste-ink: #8AD6FF; --ok: #4CC994; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #071427; --bg-2: #0C1E38; --fg: #EAF4FC; --muted: #A2B8CE; --line: #1F3B60; --celeste-soft: #12365C; --celeste-ink: #8AD6FF; --ok: #4CC994; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); }
+.in { max-width: 1160px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h2 { font: 700 clamp(28px, 4vw, 44px)/1.12 var(--f-display); letter-spacing: -.01em; }
+.eyebrow { font: 600 13px/1 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--celeste-ink); }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 60ch; font-size: 19px; }
+a { color: inherit; }
+.btn { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; padding: 14px 26px; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; font-size: 17px; }
+.btn.primary { background: var(--celeste); color: #04223A; }
+.btn.ghost { border: 1.5px solid rgba(255,255,255,.4); color: #fff; background: transparent; }
+:focus-visible { outline: 3px solid var(--celeste); outline-offset: 3px; }
+.tag { display: inline-block; background: var(--amber); color: #2B1E00; font-weight: 600; font-size: 13px; padding: 4px 12px; border-radius: 999px; letter-spacing: .02em; }
+
+/* --- hero --- */
+.hero { background: radial-gradient(1200px 600px at 80% 0%, #17406f 0%, var(--navy) 55%, #06142A 100%); color: #fff; overflow: hidden; }
+.hero .in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; padding-block: 28px 80px; align-items: center; }
+.nav { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+.logo { display: flex; align-items: center; gap: 10px; font: 700 26px/1 var(--f-display); }
+.hero h1 { font: 700 clamp(40px, 6.2vw, 76px)/1.02 var(--f-display); letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--celeste); }
+.hero .lead { color: #C9DEF0; margin-top: 22px; }
+.hero .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.honest { margin-top: 20px; color: #9DC0DE; font-size: 14px; }
+@media (max-width: 880px) { .hero .in { grid-template-columns: minmax(0, 1fr); } }
+
+/* llamada animada */
+.call { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 28px; padding: 18px; backdrop-filter: blur(6px); }
+.call-top { display: flex; align-items: center; gap: 10px; padding: 4px 6px 14px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.call-top b { font-weight: 600; } .call-top span { color: #9DC0DE; font-size: 14px; margin-left: auto; font-family: var(--f-mono); }
+.wave { display: inline-flex; gap: 3px; align-items: center; height: 16px; color: var(--celeste); }
+.wave i { width: 3px; height: 5px; background: currentColor; border-radius: 2px; animation: w 1s ease-in-out infinite; }
+.wave i:nth-child(2) { animation-delay: .15s } .wave i:nth-child(3) { animation-delay: .3s } .wave i:nth-child(4) { animation-delay: .45s }
+@keyframes w { 50% { height: 16px } }
+.lines { display: grid; gap: 10px; padding-top: 14px; }
+.l { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 15px; line-height: 1.45; animation: rise .6s cubic-bezier(.2,.8,.2,1) both; }
+.l.c { justify-self: end; background: var(--celeste); color: #04223A; border-bottom-right-radius: 4px; }
+.l.n { background: rgba(255,255,255,.1); border-bottom-left-radius: 4px; }
+.l small { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; margin-bottom: 2px; }
+.l .tool { display: inline-block; margin-top: 6px; font: 12px var(--f-mono); color: #8ED3FB; }
+.l:nth-child(1) { animation-delay: .2s } .l:nth-child(2) { animation-delay: 1s } .l:nth-child(3) { animation-delay: 2s } .l:nth-child(4) { animation-delay: 3s } .l:nth-child(5) { animation-delay: 4s }
+@keyframes rise { from { opacity: 0; transform: translateY(12px) } }
+@media (prefers-reduced-motion: reduce) { .l, .wave i { animation: none; } }
+
+/* --- secciones --- */
+section.s { padding-block: 88px; }
+section.alt { background: var(--bg-2); }
+.head { display: grid; gap: 14px; margin-bottom: 40px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 880px) { .grid3, .grid2 { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: 22px; padding: 26px; display: grid; gap: 10px; align-content: start; }
+section.alt .card { background: var(--bg); }
+.card h3 { font: 600 21px/1.25 var(--f-body); }
+.card p { color: var(--muted); }
+.ic { width: 46px; height: 46px; border-radius: 14px; background: var(--celeste-soft); color: var(--celeste-ink); display: grid; place-items: center; }
+
+.problem { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+@media (max-width: 880px) { .problem { grid-template-columns: minmax(0, 1fr); } }
+.stack { display: grid; gap: 12px; }
+.miss { display: flex; gap: 14px; align-items: center; border: 1px solid var(--line); border-radius: 18px; padding: 14px 18px; background: var(--bg); }
+.miss b { display: block; } .miss span { color: var(--muted); font-size: 14px; }
+.dot { width: 40px; height: 40px; border-radius: 50%; background: #FBE7E7; color: #C93838; display: grid; place-items: center; flex: 0 0 40px; }
+
+.ticket { font-family: var(--f-mono); font-size: 15px; background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 8px; }
+.ticket .row { display: flex; justify-content: space-between; gap: 12px; }
+.ticket .x { color: #C93838; text-decoration: line-through; } .ticket .plus { color: var(--ok); }
+.ticket .tot { border-top: 1px dashed var(--line); padding-top: 10px; font-weight: 700; font-size: 18px; }
+
+.modes .card .who { font: 600 13px var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--celeste-ink); }
+.rules { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.rules div { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.rules svg { color: var(--ok); }
+.rules b { display: block; margin-bottom: 2px; }
+.rules span { color: var(--muted); }
+
+details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+summary { cursor: pointer; font-weight: 600; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::after { content: "+"; color: var(--celeste-ink); font-weight: 700; }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); margin-top: 10px; max-width: 70ch; }
+
+.close { background: var(--navy); color: #fff; }
+.close .in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; padding-block: 88px; align-items: start; }
+@media (max-width: 880px) { .close .in { grid-template-columns: minmax(0, 1fr); } }
+.close h2 { color: #fff; } .close .lead { color: #C9DEF0; margin-top: 16px; }
+form { display: grid; gap: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 22px; padding: 24px; }
+label { display: grid; gap: 6px; font-size: 14px; color: #C9DEF0; }
+input, select { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(4,18,38,.6); color: #fff; }
+.ok-msg { background: rgba(51,196,138,.15); border: 1px solid rgba(51,196,138,.4); color: #BFF2DB; padding: 12px 14px; border-radius: 12px; font-size: 15px; }
+footer { background: #06142A; color: #8FAAC4; font-size: 14px; }
+footer .in { padding-block: 26px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; }
+</style>
+
+<header class="hero">
+  <div class="in">
+    <nav class="nav" aria-label="Principal">
+      <span class="logo"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="10" cy="17" r="5" fill="#3DB3F5"/><circle cx="25" cy="9" r="3.5" fill="#fff"/><circle cx="25" cy="25" r="3.5" fill="#fff"/><path d="M14 15 21.5 10.5M14 19l7.5 4.5" stroke="#8ED3FB" stroke-width="2.4" stroke-linecap="round"/></svg>nexo</span>
+      <span class="tag">Demostración conceptual · funciones en desarrollo</span>
+    </nav>
+    <div>
+      <h1>Atención que <em>no se corta.</em></h1>
+      <p class="lead">Nexo es un asistente virtual que atiende el teléfono, el chat de tu web y WhatsApp. Toma pedidos con cambios, informa demoras reales y, cuando hace falta, le pasa la conversación a tu equipo con todo el contexto.</p>
+      <div class="cta">
+        <a class="btn primary" href="#demo">Pedí tu demo</a>
+        <a class="btn ghost" href="https://github.com/ttom0001/nexo-vitrina#readme" target="_blank" rel="noopener">Ver el proyecto completo</a>
+      </div>
+      <p class="honest">Prototipo con datos ficticios. Todavía no está conectado a líneas telefónicas ni a WhatsApp reales.</p>
+    </div>
+    <div class="call" aria-label="Ejemplo de llamada atendida por Nexo">
+      <div class="call-top"><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><b>La Esquina del Horno · Palermo</b><span>vie 21:04</span></div>
+      <div class="lines">
+        <div class="l n"><small>Nexo · asistente virtual</small>Hola, soy Nexo, el asistente virtual de La Esquina del Horno. Contame, ¿en qué te ayudo?</div>
+        <div class="l c"><small>Cliente</small>Una muzza grande, sin cebolla y con doble queso.</div>
+        <div class="l n"><small>Nexo</small>Anoto: 1 Muzzarella grande sin cebolla y doble queso, $ 16.300. ¿Algo más o lo confirmamos?<span class="tool">✓ updateLineModifiers</span></div>
+        <div class="l c"><small>Cliente</small>Nada más.</div>
+        <div class="l n"><small>Nexo</small>Te aviso antes de confirmar: hoy estamos con demora, el pedido estaría en unos 40 minutos. ¿Te sirve igual?<span class="tool">✓ quoteEstimatedReadyAt</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="s">
+    <div class="in problem">
+      <div class="head" style="margin:0">
+        <span class="eyebrow">El problema</span>
+        <h2>El viernes a la noche, el teléfono no espera.</h2>
+        <p class="lead">La cocina está a full, suena el teléfono, entran mensajes por WhatsApp y nadie llega a todo. Se pierden clientes en la espera, y los pedidos que se toman apurados salen con errores.</p>
+      </div>
+      <div class="stack" aria-label="Situaciones típicas">
+        <div class="miss"><span class="dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></span><div><b>Llamada sin atender</b><span>El cliente prueba en otro lado.</span></div></div>
+        <div class="miss"><span class="dot">?</span><div><b>«¿Sin cebolla o con cebolla?»</b><span>La comanda quedó a medias y vuelve el reclamo.</span></div></div>
+        <div class="miss"><span class="dot">!</span><div><b>WhatsApp sin responder</b><span>Las consultas se acumulan hasta el día siguiente.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt">
+    <div class="in">
+      <div class="head"><span class="eyebrow">Cómo te ayudamos</span><h2>Atiende como lo harías vos, con tus datos.</h2></div>
+      <div class="grid3">
+        <div class="card"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg></span><h3>Entiende pedidos reales</h3><p>«Sin cebolla y con doble queso» cambia el pedido de verdad y recalcula el precio. Si el plato es ambiguo, pregunta entre opciones de tu carta.</p></div>
+        <div class="card"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Conoce tu cocina</h3><p>Tu encargado marca «Demora» o «Pausa» desde el panel y Nexo lo informa antes de confirmar. Los cupos por franja no se pasan, aunque entren diez llamadas a la vez.</p></div>
+        <div class="card"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><h3>No inventa</h3><p>Precios, stock, horarios y promociones salen de tus datos. Si no sabe algo, lo dice y deja la consulta a tu equipo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="in grid2" style="align-items:center;gap:48px">
+      <div class="head" style="margin:0">
+        <span class="eyebrow">Derivación humana</span>
+        <h2>Cuando hace falta una persona, llega con todo el contexto.</h2>
+        <p class="lead">Nexo pone al cliente en espera, le pasa a tu encargado un resumen privado y recién conecta cuando confirma que puede atender. Si no hay nadie, ofrece que lo llamen o seguir por WhatsApp, con su permiso, sin decir que ya envió algo que no envió.</p>
+      </div>
+      <div class="ticket" aria-label="Resumen privado para el encargado">
+        <div class="row"><b>Resumen privado · Laura</b><span>vie 21:12</span></div>
+        <div>Motivo: el cliente pidió una persona</div>
+        <div>Pedido PED-1042 · «faltaba una pizza»</div>
+        <div>Estado del cliente: molesto</div>
+        <div>Identidad: verificada por número y pedido</div>
+        <div class="tot row"><span>Siguiente paso</span><span class="plus">revisar pedido y ofrecer solución</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt modes">
+    <div class="in">
+      <div class="head"><span class="eyebrow">Integración</span><h2>Con tu sistema o con el nuestro.</h2><p class="lead">Elegís cómo trabaja Nexo según lo que ya usás. En cada modo te mostramos qué funciona y qué no, sin letra chica.</p></div>
+      <div class="grid3">
+        <div class="card"><span class="who">Ya tenés CRM o POS</span><h3>Nos conectamos</h3><p>Usamos la API oficial de tu sistema para catálogo, pedidos y horarios. Cada función se verifica antes de usarla.</p></div>
+        <div class="card"><span class="who">No tenés sistema</span><h3>CRM de Nexo</h3><p>Clientes, pedidos, turnos, tickets y personal, configurado para tu rubro sin campos que no usás.</p></div>
+        <div class="card"><span class="who">Facturás en otro lado</span><h3>Modo híbrido</h3><p>Tu facturación queda donde está. Nexo gestiona la atención y sincroniza datos con tu permiso, por planilla.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="in grid2" style="gap:48px">
+      <div class="head" style="margin:0"><span class="eyebrow">Por qué nos necesitás</span><h2>Reglas claras, para vos y para tus clientes.</h2></div>
+      <div class="rules">
+        <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><p><b>Siempre se presenta como asistente virtual</b><span>Nunca finge ser una persona.</span></p></div>
+        <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><p><b>Confirma antes de cargar</b><span>Ningún pedido ni reserva sin el «sí» del cliente.</span></p></div>
+        <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><p><b>Alergias, reclamos y urgencias van a tu equipo</b><span>Sin promociones en el medio.</span></p></div>
+        <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><p><b>Datos separados por comercio</b><span>Cada acción queda registrada: quién, con qué permiso y en qué sistema.</span></p></div>
+        <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><p><b>No guarda datos de tarjetas</b><span>Si hay que pagar, envía un link de pago seguro.</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt">
+    <div class="in">
+      <div class="head"><span class="eyebrow">Preguntas frecuentes</span><h2>Lo que nos preguntan primero.</h2></div>
+      <details><summary>¿Ya puedo usarlo en mi local?</summary><p>Todavía no. Nexo es un prototipo: la lógica de pedidos, derivación y seguridad está construida y probada con datos ficticios. La telefonía, WhatsApp y los conectores reales se suman por etapas, y te avisamos qué está disponible en cada una.</p></details>
+      <details><summary>¿Qué pasa si se equivoca?</summary><p>Repregunta lo dudoso, confirma el pedido completo antes de cargarlo y deriva a una persona cuando no está seguro. Tu equipo ve cada conversación y cada acción en el panel.</p></details>
+      <details><summary>¿Habla como una máquina?</summary><p>Usa frases cortas, una pregunta por vez y el tono que elijas: cercano («dale», «contame») o formal. Siempre aclara que es un asistente virtual.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>Depende de los minutos de voz y los mensajes de tu comercio. Lo cotizamos con tus volúmenes después de una prueba; no damos precios a ojo.</p></details>
+      <details><summary>¿Sirve para otros rubros?</summary><p>Sí. La demo incluye un restaurante, un gimnasio y una tienda. Cada rubro activa solo los módulos que necesita: cocina, turnos, stock o pedidos.</p></details>
+    </div>
+  </section>
+</main>
+
+<section class="close" id="demo">
+  <div class="in">
+    <div>
+      <span class="eyebrow" style="color:#8ED3FB">Pedí tu demo</span>
+      <h2 style="margin-top:12px">Lo probamos con tu menú y tus horarios.</h2>
+      <p class="lead">Contanos sobre tu comercio y armamos una demostración con tus datos. Mientras tanto, podés probar la demo interactiva con datos ficticios.</p>
+    </div>
+    <form id="lead" novalidate>
+      <label for="f-name">Tu nombre<input id="f-name" name="name" autocomplete="name" required></label>
+      <label for="f-biz">Comercio<input id="f-biz" name="business" required></label>
+      <label for="f-type">Rubro<select id="f-type" name="vertical"><option>Restaurante</option><option>Gimnasio</option><option>Tienda</option><option>Otro</option></select></label>
+      <label for="f-sys">¿Usás un sistema de gestión?<select id="f-sys" name="system"><option>Sí, con API</option><option>Sí, sin API</option><option>No</option><option>No sé</option></select></label>
+      <button class="btn primary" type="submit">Quiero mi demo</button>
+      <p class="ok-msg" id="ok" hidden>Gracias. Esta página es una demostración y el formulario todavía no envía datos a ningún lado.</p>
+    </form>
+  </div>
+</section>
+<footer><div class="in"><span>nexo · nombre de trabajo configurable</span><span>Demostración conceptual · funciones en desarrollo · datos ficticios</span></div></footer>
+
+<script>
+document.getElementById("lead").addEventListener("submit", (e) => { e.preventDefault(); document.getElementById("ok").hidden = false; });
+</script>
